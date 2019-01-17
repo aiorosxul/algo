@@ -1,22 +1,20 @@
-"""
-    Author: Wenru
-"""
+list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+value = 1
+flag = 0
 
-from typing import List
 
-def bsearch(nums: List[int], target: int) -> int:
-    """Binary search of a target in a sorted array
-    without duplicates. If such a target does not exist,
-    return -1, othewise, return its index.
-    """
-    low, high = 0, len(nums) - 1
-    while low <= high:
-        mid = low + (high - low) // 2
-        if nums[mid] == target:
-            return mid
-        elif nums[mid] < target:
-            low = mid + 1
+def Bsearch(list, value, flag) -> int:
+    try:
+        mid = len(list) // 2
+        flag += mid
+        if value == list[mid]:
+            return flag
+        elif value < list[mid]:
+            return Bsearch(list[:mid], value, flag)
         else:
-            high = mid - 1
-    
-    return -1
+            return Bsearch(list[mid:], value, flag)
+    except IndexError:
+        print('Value not found!')
+
+
+print(Bsearch(list, value, flag))
